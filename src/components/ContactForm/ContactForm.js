@@ -20,22 +20,22 @@ function ContactForm({onSubmit}) {
 
       default:
         return;
-  }
-};
+    }
+  };
 
 
-const handleSubmit = event => {
-  event.preventDefault();
+  const handleSubmit = event => {
+    event.preventDefault();
 
-  const options = { name, number };
-  onSubmit(options);
-  reset();
-};
+    const options = { name, number };
+    onSubmit(options);
+    reset();
+  };
 
-const reset = () => {
-  setName('');
-  setNumber('');
-};
+  const reset = () => {
+    setName('');
+    setNumber('');
+  };
 
     return (
       <form className={styles.ContactEditor} onSubmit={handleSubmit}>
