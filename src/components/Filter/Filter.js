@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default function Filter({ value, onChangeFilter }) {
+const Filter = ({ value, onChangeFilter }) => {
   return (
     <div>
       Find contacts by name
@@ -18,3 +18,5 @@ Filter.propTypes = {
   value: PropTypes.string.isRequired,
   onChangeFilter: PropTypes.func.isRequired,
 };
+
+export default Filter;

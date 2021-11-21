@@ -1,38 +1,52 @@
-import React, { Component } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Contact.module.css";
 
-export default class ContactForm extends Component {
-  state = {
-    name: "",
-    number: "",
-  };
+function ContactForm({onSubmit}) {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
-  handleChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value,
-    });
-  };
+  const handleChange = event => {
+    const { name, value } = event.currentTarget;
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
 
-    this.props.onAddContact({ ...this.state });
+      case 'number':
+        setNumber(value);
+        break;
 
-    this.setState({ name: "", number: "" });
-  };
-  render() {
+      default:
+        return;
+  }
+};
+
+
+const handleSubmit = event => {
+  event.preventDefault();
+
+  const options = { name, number };
+  onSubmit(options);
+  reset();
+};
+
+const reset = () => {
+  setName('');
+  setNumber('');
+};
+
     return (
-      <form className={styles.ContactEditor} onSubmit={this.handleSubmit}>
+      <form className={styles.ContactEditor} onSubmit={handleSubmit}>
         <label className={styles.ContactEditor_label}>
           Name
           <input
             className={styles.ContactEditor_input}
             type="text"
             name="name"
-            value={this.state.name}
-            onChange={this.handleChange}
+            value={name}
+            onChange={handleChange}
           />
         </label>
         <label className={styles.ContactEditor_label}>
@@ -41,8 +55,8 @@ export default class ContactForm extends Component {
             className={styles.ContactEditor_input}
             type="text"
             name="number"
-            value={this.state.number}
-            onChange={this.handleChange}
+            value={number}
+            onChange={handleChange}
           />
         </label>
         <button className={styles.ContactEditor_button} type="submit">
@@ -50,7 +64,7 @@ export default class ContactForm extends Component {
         </button>
       </form>
     );
-  }
+
 }
 
 ContactForm.propTypes = {
@@ -58,3 +72,5 @@ ContactForm.propTypes = {
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
 };
+
+export default ContactForm
