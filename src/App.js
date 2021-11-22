@@ -71,7 +71,7 @@ function App() {
       <div className="Container2">
         <h1>Phonebook</h1>
 
-        <ContactForm onAddContact={addContact} />
+        <ContactForm onSubmit={addContact} />
         <h2>Contacts</h2>
         <Filter onChangeFilter={changeFilter} />
         <ContactList
